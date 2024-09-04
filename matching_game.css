@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 2%;
+}
+
+h1 {
+    color: rebeccapurple;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 35px;
+}
+
+h2 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    border: 2px solid rebeccapurple;
+    border-radius: 15px;
+    color: rebeccapurple;
+    font-size: 17.5px;
+    padding: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 10px;
+}
+
+a {
+    color: rebeccapurple;
+}
