@@ -3,7 +3,10 @@ body {
     color: white;
     text-align: center;
     margin: 0;
-    padding-bottom: 2%;
+    padding-bottom: 1.5%;
+    padding-top: 1.5%;
+    padding-left: 6.5%;
+    padding-right: 6.5%;
 }
 
 h1 {
@@ -37,4 +40,23 @@ li {
 
 a {
     color: rebeccapurple;
+}
+
+a:hover {
+    color: blue;
+}
+
+button {
+    width: 175px;
+    height: 175px;
+    border-radius: 15px;
+    border: 2px solid;
+    border-color: rebeccapurple;
+    margin-top: 10px; margin-bottom: 10px;
+    margin-left: 10px; margin-right: 10px;
+    float: left;
+}
+
+button:hover {
+    background-color: #555;
 }
