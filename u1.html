@@ -6,23 +6,39 @@
     <link href="matching_game.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <button type="button" id="card1"></button>
-    <button type="button" id="card2"></button>
-    <button type="button" id="card3"></button>
-    <button type="button" id="card4"></button>
-    <button type="button" id="card5"></button>
-    <button type="button" id="card6"></button>
-    <button type="button" id="card7"></button>
-    <button type="button" id="card8"></button>
-    <button type="button" id="card9"></button>
-    <button type="button" id="card10"></button>
-    <button type="button" id="card11"></button>
-    <button type="button" id="card12"></button>
-    <button type="button" id="card13"></button>
-    <button type="button" id="card14"></button>
-    <button type="button" id="card15"></button>
-    <button type="button" id="card16"></button>
-    <button type="button" id="card17"></button>
-    <button type="button" id="card18"></button>
+    <div id="selecttype">
+        <input class="select_type" type="radio" name="select_type" id="selected_dates" value="dates">
+        <label id="selected_date" for="dates">dates</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_materials" value="materials">
+        <label id="selected_material" for="materials">materials</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_forms" value="forms">
+        <label id="selected_form" for="forms">forms</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_contents" value="contents">
+        <label id="selected_content" for="contents">contents</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_functions" value="functions">
+        <label id="selected_function" for="functions">functions</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_contexts" value="contexts">
+        <label id="selected_context" for="contexts">contexts</label> <br>
+    </div>
+    <button type="button" id="submit_type">Continue</button>
+
+    <button class="matchcard" type="button" id="card1" hidden></button>
+    <button class="matchcard" type="button" id="card2" hidden></button>
+    <button class="matchcard" type="button" id="card3" hidden></button>
+    <button class="matchcard" type="button" id="card4" hidden></button>
+    <button class="matchcard" type="button" id="card5" hidden></button>
+    <button class="matchcard" type="button" id="card6" hidden></button>
+    <button class="matchcard" type="button" id="card7" hidden></button>
+    <button class="matchcard" type="button" id="card8" hidden></button>
+    <button class="matchcard" type="button" id="card9" hidden></button>
+    <button class="matchcard" type="button" id="card10" hidden></button>
+    <button class="matchcard" type="button" id="card11" hidden></button>
+    <button class="matchcard" type="button" id="card12" hidden></button>
+    <button class="matchcard" type="button" id="card13" hidden></button>
+    <button class="matchcard" type="button" id="card14" hidden></button>
+    <button class="matchcard" type="button" id="card15" hidden></button>
+    <button class="matchcard" type="button" id="card16" hidden></button>
+    <button class="matchcard" type="button" id="card17" hidden></button>
+    <button class="matchcard" type="button" id="card18" hidden></button>
     <script src="matching_game.js"></script>
 </body>
