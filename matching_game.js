@@ -87,60 +87,16 @@ function setcardtype() {
     if (cardtype) {
         console.log(cardtype);
         
-        document.getElementById("selected_dates").style.display = "none";
-        document.getElementById("selected_date").style.display = "none";
-        document.getElementById("selected_materials").style.display = "none";
-        document.getElementById("selected_material").style.display = "none";
-        document.getElementById("selected_forms").style.display = "none";
-        document.getElementById("selected_form").style.display = "none";
-        document.getElementById("selected_contents").style.display = "none";
-        document.getElementById("selected_content").style.display = "none";
-        document.getElementById("selected_functions").style.display = "none";
-        document.getElementById("selected_function").style.display = "none";
-        document.getElementById("selected_contexts").style.display = "none";
-        document.getElementById("selected_context").style.display = "none";
-        document.getElementById("submit_type").style.display = "none";
-    
-        document.getElementById("card1").style.display = "inline";
-        document.getElementById("card2").style.display = "inline";
-        document.getElementById("card3").style.display = "inline";
-        document.getElementById("card4").style.display = "inline";
-        document.getElementById("card5").style.display = "inline";
-        document.getElementById("card6").style.display = "inline";
-        document.getElementById("card7").style.display = "inline";
-        document.getElementById("card8").style.display = "inline";
-        document.getElementById("card9").style.display = "inline";
-        document.getElementById("card10").style.display = "inline";
-        document.getElementById("card11").style.display = "inline";
-        document.getElementById("card12").style.display = "inline";
-        document.getElementById("card13").style.display = "inline";
-        document.getElementById("card14").style.display = "inline";
-        document.getElementById("card15").style.display = "inline";
-        document.getElementById("card16").style.display = "inline";
-        document.getElementById("card17").style.display = "inline";
-        document.getElementById("card18").style.display = "inline";
+        let choosetype = document.getElementsByName("select_type");
+        for (i=0; i<choosetype.length; i++) {choosetype[i].style.display = "none";}
 
+        let cardslist = document.getElementsByClassName("matchcard");
+        for (i=0; i<cardslist.length; i++) {cardslist[i].style.display = "inline";}
+    
         while(cards.length > 0) {
             cards[0].addart(cardtype);
         }
 
-        console.log(document.getElementById("card1").innerText);
-        console.log(document.getElementById("card2").innerText);
-        console.log(document.getElementById("card3").innerText);
-        console.log(document.getElementById("card4").innerText);
-        console.log(document.getElementById("card5").innerText);
-        console.log(document.getElementById("card6").innerText);
-        console.log(document.getElementById("card7").innerText);
-        console.log(document.getElementById("card8").innerText);
-        console.log(document.getElementById("card9").innerText);
-        console.log(document.getElementById("card10").innerText);
-        console.log(document.getElementById("card11").innerText);
-        console.log(document.getElementById("card12").innerText);
-        console.log(document.getElementById("card13").innerText);
-        console.log(document.getElementById("card14").innerText);
-        console.log(document.getElementById("card15").innerText);
-        console.log(document.getElementById("card16").innerText);
-        console.log(document.getElementById("card17").innerText);
-        console.log(document.getElementById("card18").innerText);
+        for (i=0; i<cardslist.length; i++) {console.log(cardslist[i].innerText);}
     } //add error message later
 }
