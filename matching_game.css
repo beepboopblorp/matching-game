@@ -56,10 +56,13 @@ a:hover {
     margin-left: 10px; margin-right: 10px;
     float: left;
     display: none;
+    background-color: lightgrey;
+    color: black;
 }
 
 button.matchcard:hover {
     background-color: #555;
+    color: #555;
 }
 
 input.select_type {
