@@ -123,23 +123,23 @@ function assigntocard() {
                 break;
 
             case "materials":
-                document.getElementById(emptycards[i]).innerText = artnames[i] + " materials";
+                document.getElementById(emptycards[i]).innerText = artnames[i] + " material";
                 break;   
 
             case "forms":
-                document.getElementById(emptycards[i]).innerText = artnames[i] + " forms";
+                document.getElementById(emptycards[i]).innerText = artnames[i] + " form";
                 break;
 
             case "contents":
-                document.getElementById(emptycards[i]).innerText = artnames[i] + " contents";
+                document.getElementById(emptycards[i]).innerText = artnames[i] + " content";
                 break;
 
             case "functions":
-                document.getElementById(emptycards[i]).innerText = artnames[i] + " functions";
+                document.getElementById(emptycards[i]).innerText = artnames[i] + " function";
                 break;
             
             case "contexts":
-                document.getElementById(emptycards[i]).innerText = artnames[i] + " contexts";
+                document.getElementById(emptycards[i]).innerText = artnames[i] + " context";
                 break;
         }
     }
@@ -189,14 +189,94 @@ function correctcheck(thisclicked) {
                 }
                 break;
             case "materials":
+                for (let y=0; y < 18; y++) {
+                    if ((cardslist[y].style.color == "white") && (cardslist[y].style.borderColor != "green") && (cardslist[y] != thisclicked)) {
+                        cardcompared = cardslist[y];
+                        for (let x=0; x < art.length; x++) {
+                            if (thisclicked.innerText.includes(art[x].material) || thisclicked.innerText.includes(art[x].name)) {
+                                artcompared = art[x];
+                            }
+                        }
+                    }
+                }
+                if ((thisclicked.innerText.includes(artcompared.material) && cardcompared.innerText.includes(artcompared.name)) || 
+                    (thisclicked.innerText.includes(artcompared.name) && cardcompared.innerText.includes(artcompared.material))) {
+                    istrue(thisclicked, cardcompared);
+                } else {
+                    isfalse(thisclicked, cardcompared);
+                }
                 break;
             case "forms":
+                for (let y=0; y < 18; y++) {
+                    if ((cardslist[y].style.color == "white") && (cardslist[y].style.borderColor != "green") && (cardslist[y] != thisclicked)) {
+                        cardcompared = cardslist[y];
+                        for (let x=0; x < art.length; x++) {
+                            if (thisclicked.innerText.includes(art[x].form) || thisclicked.innerText.includes(art[x].name)) {
+                                artcompared = art[x];
+                            }
+                        }
+                    }
+                }
+                if ((thisclicked.innerText.includes(artcompared.form) && cardcompared.innerText.includes(artcompared.name)) || 
+                    (thisclicked.innerText.includes(artcompared.name) && cardcompared.innerText.includes(artcompared.form))) {
+                    istrue(thisclicked, cardcompared);
+                } else {
+                    isfalse(thisclicked, cardcompared);
+                }
                 break;
             case "contents":
+                for (let y=0; y < 18; y++) {
+                    if ((cardslist[y].style.color == "white") && (cardslist[y].style.borderColor != "green") && (cardslist[y] != thisclicked)) {
+                        cardcompared = cardslist[y];
+                        for (let x=0; x < art.length; x++) {
+                            if (thisclicked.innerText.includes(art[x].content) || thisclicked.innerText.includes(art[x].name)) {
+                                artcompared = art[x];
+                            }
+                        }
+                    }
+                }
+                if ((thisclicked.innerText.includes(artcompared.content) && cardcompared.innerText.includes(artcompared.name)) || 
+                    (thisclicked.innerText.includes(artcompared.name) && cardcompared.innerText.includes(artcompared.content))) {
+                    istrue(thisclicked, cardcompared);
+                } else {
+                    isfalse(thisclicked, cardcompared);
+                }
                 break;
             case "functions":
+                for (let y=0; y < 18; y++) {
+                    if ((cardslist[y].style.color == "white") && (cardslist[y].style.borderColor != "green") && (cardslist[y] != thisclicked)) {
+                        cardcompared = cardslist[y];
+                        for (let x=0; x < art.length; x++) {
+                            if (thisclicked.innerText.includes(art[x].function) || thisclicked.innerText.includes(art[x].name)) {
+                                artcompared = art[x];
+                            }
+                        }
+                    }
+                }
+                if ((thisclicked.innerText.includes(artcompared.function) && cardcompared.innerText.includes(artcompared.name)) || 
+                    (thisclicked.innerText.includes(artcompared.name) && cardcompared.innerText.includes(artcompared.function))) {
+                    istrue(thisclicked, cardcompared);
+                } else {
+                    isfalse(thisclicked, cardcompared);
+                }
                 break;
             case "contexts":
+                for (let y=0; y < 18; y++) {
+                    if ((cardslist[y].style.color == "white") && (cardslist[y].style.borderColor != "green") && (cardslist[y] != thisclicked)) {
+                        cardcompared = cardslist[y];
+                        for (let x=0; x < art.length; x++) {
+                            if (thisclicked.innerText.includes(art[x].context) || thisclicked.innerText.includes(art[x].name)) {
+                                artcompared = art[x];
+                            }
+                        }
+                    }
+                }
+                if ((thisclicked.innerText.includes(artcompared.context) && cardcompared.innerText.includes(artcompared.name)) || 
+                    (thisclicked.innerText.includes(artcompared.name) && cardcompared.innerText.includes(artcompared.context))) {
+                    istrue(thisclicked, cardcompared);
+                } else {
+                    isfalse(thisclicked, cardcompared);
+                }
                 break;
         }
     }
