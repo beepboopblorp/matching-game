@@ -146,10 +146,14 @@ function assigntocard() {
 }
 
 function clickyfuntime() {
+    if (this.style.borderColor === "green") {
+        return;  // Exit the function if the card is already marked as correct
+    }
+
     let cardslist = document.getElementsByClassName("matchcard");
     ccc = 0;
     for (let i=0; i < 18; i++) {
-        if ((cardslist[i].style.color == "white") && (cardslist[i].style.borderColor != "green")) {
+        if ((cardslist[i].style.color == "white")) {
             ccc += 1;
         }
     }
@@ -282,6 +286,7 @@ function correctcheck(thisclicked) {
     }
 }
 
+let ecc = 0; //end correct counter
 function istrue(thisclicked, otherclicked) {
     thisclicked.style.borderColor = "green";
     thisclicked.style.backgroundColor = "white";
@@ -290,6 +295,25 @@ function istrue(thisclicked, otherclicked) {
     otherclicked.style.borderColor = "green";
     otherclicked.style.backgroundColor = "white";
     otherclicked.style.color = "black";
+
+    let allMatched = true;
+    for (let i = 0; i < 18; i++) {
+        let matchcardid = "card" + (i + 1);
+        if (document.getElementById(matchcardid).style.borderColor !== "green") {
+            allMatched = false;
+            break;
+        }
+    }
+
+    if (allMatched) {
+        setTimeout(() => {
+            document.getElementById("endbox").style.display = "inline";
+            for (let i=0; i < 18; i++) {
+                let matchcardid = "card" + (i + 1);
+                document.getElementById(matchcardid).style.display = "none";
+            }
+        }, 500);
+    }
 }
 
 function isfalse(thisclicked, otherclicked) {
