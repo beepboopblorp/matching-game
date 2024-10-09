@@ -75,6 +75,7 @@ label {
 }
   
 #selecttype {
+    display: none;
     padding-bottom: 7.5px;
 }
 

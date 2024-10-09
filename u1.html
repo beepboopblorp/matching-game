@@ -6,11 +6,31 @@
     <link href="matching_game.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div id="selectunit">
+        <ul>
+            <li><button value="1B" class="select_unit"> Unit 1B: Global Prehistory </button></li>
+            <li><button value="2B" class="select_unit"> Unit 2B: Ancient Egyptian </button></li>
+            <li><button value="2C" class="select_unit"> Unit 2C: Etruscan, Greek and Roman </button></li>
+            <li><button value="3" class="select_unit"> Unit 3: Byzantine, Medieval, Romanesque and Gothic </button></li>
+            <li><button value="4A" class="select_unit"> Unit 4A: Baroque </button></li>
+            <li><button value="4B" class="select_unit"> Unit 4B: Renaissance </button></li>
+            <li><button value="5" class="select_unit"> Unit 5: 18th and 19th Century </button></li>
+            <li><button value="6" class="select_unit"> Unit 6: Africa </button></li>
+            <li><button value="7" class="select_unit"> Unit 7: Indigenous Americas </button></li>
+            <li><button value="8" class="select_unit"> Unit 8: Asia </button></li>
+            <li><button value="9" class="select_unit"> Unit 9: The Pacific </button></li>
+            <li><button value="10" class="select_unit"> Unit 10: Global Contemporary </button></li>
+            <li><button value="all" class="select_unit"> All Units </button></li>
+        </ul>
+    </div>
+
     <div id="selecttype">
         <input class="select_type" type="radio" name="select_type" id="selected_dates" value="dates">
         <label id="selected_date" for="dates" name="select_type">dates</label> <br>
         <input class="select_type" type="radio" name="select_type" id="selected_materials" value="materials">
         <label id="selected_material" for="materials" name="select_type">materials</label> <br>
+        <input class="select_type" type="radio" name="select_type" id="selected_location" value="location">
+        <label id="selected_location" for="location" name="select_type">location</label> <br>
         <input class="select_type" type="radio" name="select_type" id="selected_forms" value="forms">
         <label id="selected_form" for="forms" name="select_type">forms</label> <br>
         <input class="select_type" type="radio" name="select_type" id="selected_contents" value="contents">
