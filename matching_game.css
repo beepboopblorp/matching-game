@@ -27,7 +27,7 @@ ul {
     padding: 0;
 }
 
-li {
+.select_unit {
     border: 2px solid rebeccapurple;
     border-radius: 15px;
     color: rebeccapurple;
@@ -36,6 +36,12 @@ li {
     margin-left: 30%;
     margin-right: 30%;
     margin-bottom: 10px;
+    background-color: black;
+}
+
+.select_unit:hover {
+    background-color: rebeccapurple;
+    color: black;
 }
 
 a {
@@ -86,4 +92,8 @@ label {
 
 #return {
     display: block;
+}
+
+#submit_type {
+    display: none;
 }
