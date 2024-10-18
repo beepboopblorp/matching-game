@@ -3,12 +3,14 @@ let randnums = [], cardnums = [], artnames = [], emptycards = [];
 let ccc = 0; //ccc = clicked card counter
 let artcompared, cardcompared;
 
+//note: once form/content/function/context is added, might need to change the order of artist, input the defaults, etc. verifying artist existence with boolean
 class info {
-    constructor(artnum = "", name = "", culture = "", date = "", material = "", form = "form", content = "content", art_function = "function", context = "context") {
+    constructor(artnum = "", name = "", culture = "", date = "", material = "", artist = "", form = "form", content = "content", art_function = "function", context = "context") {
         this.name = name;
         this.date = date;
         this.culture = culture;
         this.material = material;
+        this.artist = artist;
         this.form = form;
         this.content = content;
         this.function = art_function;
@@ -30,12 +32,12 @@ let art = [
     new info(10, "Tiatilco Female Figurine", "Site of Tiatilco, Central Mexico", "1200 to 900 B.C.E.", "ceramic"), 
     new info(11, "Terra Cotta Fragment", "Lapita, Solomon Islands, Reef Islands", "1000 B.C.E.", "incised terra cotta"),
     new info(12, "White Temple and its Ziggurat", "Sumerian", "3,500 to 3,000 B.C.E.", "mud brick"),
-    new info(13, "Palette of King Narmer", "Predynastic Egypt", "3,000 to 2,920 B.C.E.", "greywacke"), 
+    new info(13, "Palette of King Narmer", "Predynastic Egypt", "3,000 to 2,920 B.C.E.", "greywacke", "artist"), 
     new info(14, "Statue of Votive Figures", "Sumerian", "2,700 B.C.E.", "gypsum inlaid with shell and black limestone"), 
-    new info(15, "Seated Scribe", "Old Kingdom Egypt", "2,620 to 2,500 B.C.E.", "painted limestone"), 
+    new info(15, "Seated Scribe", "Old Kingdom Egypt", "2,620 to 2,500 B.C.E.", "painted limestone", "artist"), 
     new info(16, "Standard of Ur", "Sumerian", "2,600 to 2,400 B.C.E.", "wood inlaid with shell, lapis lazuli, and red limestone"), 
-    new info(17, "Great Pyramids and Great Sphinx", "Old Kingdom Egypt", "2,550 to 2,490 B.C.E.", "limestone"), 
-    new info(18, "King Menkaure and Queen", "Old Kingdom Egypt", "2,490 to 2,472 B.C.E.", "greywacke"), 
+    new info(17, "Great Pyramids and Great Sphinx", "Old Kingdom Egypt", "2,550 to 2,490 B.C.E.", "limestone", "artist"), 
+    new info(18, "King Menkaure and Queen", "Old Kingdom Egypt", "2,490 to 2,472 B.C.E.", "greywacke", "artist"), 
     new info(19, "The Code of Hammurabi", "Babylonian", "1,792 to 1,750 B.C.E.", "basalt"), 
     new info(20, "Temple of Amun-Re and Hypostyle Hall", "New Kingdom Egypt", "1550 and 1250 B.C.E.", "sandstone and mud brick"), 
     new info(21, "Mortuary Temple of Hatshepsut", "New Kingdom Egypt", "1,473 to 1,458 B.C.E.", "sandstone, partially carved into a rock cliff, and red granite"), 
@@ -43,16 +45,16 @@ let art = [
     new info(23, "Tutankhamun's Tomb, Innermost Coffin", "New Kingdom Egypt", "1,323 B.C.E.", "gold with inlay of enamel and semiprecious stone"), 
     new info(24, "Last Judgement of Hu-Nefer", "New Kingdom Egypt", "1,275 B.C.E.", "painted papyrus scroll"), 
     new info(25, "Lamassu from the Citadel of Sargon II", "Neo-Assyrian", "720-705 B.C.E.", "alabaster"), 
-    new info(26, "Athenian Agora", "Archaic through Hellenistic Greek", "600 B.C.E. to 150 C.E.", "plan"), 
-    new info(27, "Anavysos Kouros", "Archaic Greek", "530 B.C.E.", "painted marble"), 
-    new info(28, "Peplos Kore", "Archaic Greek", "530 B.C.E.", "painted marble"), 
-    new info(29, "Sarcophagus of the Spouses", "Etruscan", "520 B.C.E.", "terra cotta"),
-    new info(30, "Audience Hall (Apadana) of Darius and Xerxes", "Persian", "520 to 465 B.C.E.", "limestone"), 
+    new info(26, "Athenian Agora", "Archaic through Hellenistic Greek", "600 B.C.E. to 150 C.E.", "plan", "artist"), 
+    new info(27, "Anavysos Kouros", "Archaic Greek", "530 B.C.E.", "painted marble", "artist"), 
+    new info(28, "Peplos Kore", "Archaic Greek", "530 B.C.E.", "painted marble", "artist"), 
+    new info(29, "Sarcophagus of the Spouses", "Etruscan", "520 B.C.E.", "terra cotta", "artist"),
+    new info(30, "Audience Hall (Apadana) of Darius and Xerxes", "Persian", "520 to 465 B.C.E.", "limestone", "artist"), 
     new info(31, "Temple of Minerva and Sculpture of Apollo", "Etruscan", "510 to 500 B.C.E.", "wood, mud brick, and tufa with terra cotta sculpture"), 
-    new info(32, "Tomb of the Triclinium", "Etruscan", "480 to 470 B.C.E.", "tufa and fresco"),
-    new info(33, "Niobides Krater", "Classical Greek", "460 to 450 B.C.E.", "clay with red-figure technique and white highlights"), 
-    new info(34, "Doryphoros (Spear Bearer)", "Roman Copy of Greek Original", "450 to 440 B.C.E.", "marble"), 
-    new info(35, "Acropolis", "Classical Greek", "447 to 410 B.C.E.", "marble"), 
+    new info(32, "Tomb of the Triclinium", "Etruscan", "480 to 470 B.C.E.", "tufa and fresco", "artist"),
+    new info(33, "Niobides Krater", "Classical Greek", "460 to 450 B.C.E.", "clay with red-figure technique and white highlights", "artist"), 
+    new info(34, "Doryphoros (Spear Bearer)", "Roman Copy of Greek Original", "450 to 440 B.C.E.", "marble", "artist"), 
+    new info(35, "Acropolis", "Classical Greek", "447 to 410 B.C.E.", "marble", "artist"), 
     new info(36, "Grave Stele of Hegeso", "Classical Greek", "410 B.C.E.", "marble and paint"), 
     new info(37, "Winged Victory of Samothrace", "Hellenistic Greek", "190 B.C.E.", "marble"), 
     new info(38, "Great Altar of Zeus and Athena at Pergamon", "Hellenistic Greek", "175 B.C.E.", "marble"),
@@ -65,19 +67,19 @@ let art = [
     new info(45, "Forum of Trajan", "Imperial Roman", "106 to 113 C.E.", "brick, concrete, and marble"), 
     new info(46, "Pantheon", "Imperial Roman", "118 to 125 C.E.", "concrete with stone facing"), 
     new info(47, "Ludovisi Battle Sarcophagus", "Late Imperial Roman", "250 C.E.", "marble"),
-    new info(48, "Catacomb of Priscilla", "Late Antique Europe", "200 to 400 C.E.", "excavated tufa and fresco"),
-    new info(49, "Santa Sabina", "Late Antique Europe", "422 to 432 C.E.", "brick and stone, wooden roof"),
-    new info(50, "Vienna Genesis", "Early Byzantine Europe", "Early 6th Century C.E.", "pigment on vellum"), 
-    new info(51, "San Vitale", "Early Byzantine Europe", "526 to 547 C.E.", "brick, marble, and stone veneer mosaic"),
-    new info(52, "Hagia Sophia", "Byzantine", "532 to 537 C.E.", "brick and ceramic elements with stone and mosaic veneer"),
+    new info(48, "Catacomb of Priscilla", "Late Antique Europe", "200 to 400 C.E.", "excavated tufa and fresco", "artist"),
+    new info(49, "Santa Sabina", "Late Antique Europe", "422 to 432 C.E.", "brick and stone, wooden roof", "artist"),
+    new info(50, "Vienna Genesis", "Early Byzantine Europe", "Early 6th Century C.E.", "pigment on vellum", "artist"), 
+    new info(51, "San Vitale", "Early Byzantine Europe", "526 to 547 C.E.", "brick, marble, and stone veneer mosaic", "artist"),
+    new info(52, "Hagia Sophia", "Byzantine", "532 to 537 C.E.", "brick and ceramic elements with stone and mosaic veneer", "artist"),
     new info(53, "Merovingian Looped Fibula", "Early Medieval Europe", "Mid 6th Century C.E.", "Silver gilt worked in filigree, with inlays of garnets and other stones"), 
-    new info(54, "Virgin and Child between Saints Theodore and George", "Early Byzantine Europe", "500 to 600 C.E.", "encaustic on wood"), 
-    new info(55, "Lindisfarne Gospels", "Early Medieval (Hiberno Saxon) Europe", "700 C.E.", "ink, pigments, and gold on vellum"), 
-    new info(56, "Great Mosque", "Umayyad", "785 to 786 C.E.", "stone masonry"), 
-    new info(57, "Pyxis of al-Mughira", "Umayyad", "968 C.E.", "ivory"), 
+    new info(54, "Virgin and Child between Saints Theodore and George", "Early Byzantine Europe", "500 to 600 C.E.", "encaustic on wood", "artist"), 
+    new info(55, "Lindisfarne Gospels", "Early Medieval (Hiberno Saxon) Europe", "700 C.E.", "ink, pigments, and gold on vellum", "artist"), 
+    new info(56, "Great Mosque", "Umayyad", "785 to 786 C.E.", "stone masonry", "artist"), 
+    new info(57, "Pyxis of al-Mughira", "Umayyad", "968 C.E.", "ivory", "artist"), 
     new info(58, "Church of Sainte-Foy", "Romanesque Europe", "800 to 1130 C.E.", "stone, paint, gold, silver, gemstones, and enamel over wood"), 
-    new info(59, "Bayeux Tapestry", "Romanesque Europe (English or Norman)", "1066 to 1080 C.E.", "embroidery on linen"),
-    new info(60, "Chartres Cathedral", "Gothic Europe", "1550 and 1250 B.C.E.", "sandstone and mud brick"), 
+    new info(59, "Bayeux Tapestry", "Romanesque Europe (English or Norman)", "1066 to 1080 C.E.", "embroidery on linen", "artist"),
+    new info(60, "Chartres Cathedral", "Gothic Europe", "1550 and 1250 B.C.E.", "sandstone and mud brick", "artist"), 
     new info(61, "Bibles Moralisée of King Louis IX (Dedication Page from the Apocalypse)", "Gothic Europe", "1226 to 1234 C.E.", "ink, tempera, and gold leaf on vellum"), 
     new info(62, "Rottgen Pieta", "Late Medieval Europe", "1300 to 1325 C.E.", "painted wood"),
     new info(63, "Arena (Scrovegni) Chapel", "Late Medieval Europe", "1,303 C.E.", "brick"), 
@@ -118,8 +120,6 @@ let art = [
     new info(98, "The Tete a Tete", "Baroque", "1743 C.E.", "oil on canvas")
 ];
 
-
-
 let units = document.getElementsByClassName("select_unit");
 let chosen_unit;
 
@@ -132,6 +132,8 @@ for (i=0; i < units.length; i++) {
 }
 
 function unitselect() {
+    this.style.backgroundColor = "rebeccapurple";
+    this.style.color = "black";
     chosen_unit = this.value;
     switch (chosen_unit) {
         case "1B":
@@ -192,9 +194,12 @@ function setcardtype() {
     for (let i=0; i<properties.length; i++) {
         if (properties[i].checked) {
             cardtype = properties[i].value;
-        } // add an html red error  message
+        } else {
+            document.getElementById("errormsg").innerText = "No property was selected. Try again.";
+        }
     }
 
+    let artistnum = 0;
     if (cardtype) {
         document.getElementById("selectunit").style.display = "none";
 
@@ -204,6 +209,25 @@ function setcardtype() {
         let cardslist = document.getElementsByClassName("matchcard");
         for (let i=0; i<cardslist.length; i++) {cardslist[i].style.display = "inline";}
 
+        if (cardtype == "artist") {
+            let artistarts = [];
+            for (i=0; i < unitarts.length; i++) {
+                if (unitarts[i].artist) {
+                    artistnum++;
+                }
+            }
+        }
+
+        if ((cardtype == "artist") && (artistnum < 9)) {
+            document.getElementById("endbox").style.display = "inline";
+            document.getElementById("endbox").innerHTML = `<p>An error occured. Not enough artists to play matching game. Click return to play again.</p>
+                                                            <a id="return" href="index.html">Return</a>`;
+            for (let i=0; i < 18; i++) {
+                let matchcardid = "card" + (i + 1);
+                document.getElementById(matchcardid).style.display = "none";
+            }
+        }
+
         randassign();
         randcardassign();
         assigntocard();
@@ -211,25 +235,53 @@ function setcardtype() {
 }
 
 function randassign() {
-    while (randnums.length < 10) {
-        randnum = Math.floor(Math.random() * unitarts.length);
-        if (!randnums.includes(randnum)) {
-            randnums.push(randnum);
+    let unfiltered = true;
+    let bac = 0; //blank artist counter
+    if (cardtype != "artist") {
+        while (randnums.length < 9) {
+            randnum = Math.floor(Math.random() * unitarts.length);
+            if (!randnums.includes(randnum)) {
+                randnums.push(randnum);
+            }
         }
+    } else if (cardtype == "artist") {
+        while (unfiltered) {
+            if (unitarts[bac].artist) {
+                if (((unitarts.length - 1) == bac) || (unitarts.length == bac)) {
+                    unfiltered = false;
+                } else {
+                    bac++;
+                }
+            } else {
+                if (((unitarts.length - 1) == bac) || (unitarts.length == bac)) {
+                    unitarts.splice(bac, 1);
+                    unfiltered = false;
+                } else {
+                    unitarts.splice(bac, 1);
+                }
+            }
+        }
+        console.log(unitarts.length);
+        while (randnums.length < 9) {
+            randnum = Math.floor(Math.random() * unitarts.length);
+            if (!randnums.includes(randnum)) {
+                randnums.push(randnum);
+            }
+        }
+        console.log(randnums);
+    } else {
+        document.getElementById("endbox").innerHTML = `<p>An error occured. Click return to play again.</p>
+                                                            <a id="return" href="index.html">Return</a>`;
     }
-
-    randnums.splice((randnums.length - 1),1);
 }
 
 function randcardassign() {
-    while (cardnums.length < 10) {
+    while (cardnums.length < 9) {
         randnum = Math.floor(Math.random() * 18);
         if (!cardnums.includes(randnum)) {
             cardnums.push(randnum);
         }
     }
-
-    cardnums.splice((cardnums.length - 1),1);
 }
 
 function assigntocard() {
@@ -245,36 +297,49 @@ function assigntocard() {
                 case "dates":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].date;
                     document.getElementById(cardid).value = unitarts[randnums[i]].date;
+                    document.getElementById(cardid).title = "info";
                     break;
 
                 case "materials":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].material;
                     document.getElementById(cardid).value = unitarts[randnums[i]].material;
+                    document.getElementById(cardid).title = "info";
                     break;
                     
                 case "culture":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].culture;
                     document.getElementById(cardid).value = unitarts[randnums[i]].culture;
+                    document.getElementById(cardid).title = "info";
+                    break;
+
+                case "artist":
+                    document.getElementById(cardid).innerText = unitarts[randnums[i]].artist;
+                    document.getElementById(cardid).value = unitarts[randnums[i]].artist;
+                    document.getElementById(cardid).title = "info";
                     break;
 
                 case "forms":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].form;
                     document.getElementById(cardid).value = unitarts[randnums[i]].form;
+                    document.getElementById(cardid).title = "info";
                     break;
 
                 case "contents":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].content;
                     document.getElementById(cardid).value = unitarts[randnums[i]].content;
+                    document.getElementById(cardid).title = "info";
                     break;
 
                 case "functions":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].function;
                     document.getElementById(cardid).value = unitarts[randnums[i]].function;
+                    document.getElementById(cardid).title = "info";
                     break;
                 
                 case "contexts":
                     document.getElementById(cardid).innerText = unitarts[randnums[i]].context;
                     document.getElementById(cardid).value = unitarts[randnums[i]].context;
+                    document.getElementById(cardid).title = "info";
                     break;
             }
 
@@ -294,36 +359,49 @@ function assigntocard() {
             case "dates":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " date";
                 document.getElementById(emptycards[i]).value = artnames[i].date;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
 
             case "materials":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " material";
                 document.getElementById(emptycards[i]).value = artnames[i].material;
+                document.getElementById(emptycards[i]).title = "name";
                 break;   
 
             case "culture":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " culture";
                 document.getElementById(emptycards[i]).value = artnames[i].culture;
+                document.getElementById(emptycards[i]).title = "name";
+                break;
+
+            case "artist":
+                document.getElementById(emptycards[i]).innerText = artnames[i].name + " artist";
+                document.getElementById(emptycards[i]).value = artnames[i].artist;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
 
             case "forms":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " form";
                 document.getElementById(emptycards[i]).value = artnames[i].form;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
 
             case "contents":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " content";
                 document.getElementById(emptycards[i]).value = artnames[i].content;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
 
             case "functions":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " function";
                 document.getElementById(emptycards[i]).value = artnames[i].function;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
             
             case "contexts":
                 document.getElementById(emptycards[i]).innerText = artnames[i].name + " context";
                 document.getElementById(emptycards[i]).value = artnames[i].context;
+                document.getElementById(emptycards[i]).title = "name";
                 break;
         }
     }
@@ -356,11 +434,10 @@ function clickyfuntime() {
 
 function correctcheck(thisclicked) {
     let cardslist = document.getElementsByClassName("matchcard");
-
     for (let y = 0; y < cardslist.length; y++) {
         if (cardslist[y].style.color === "white" && cardslist[y] !== thisclicked) {
             let cardcompared = cardslist[y];
-            let isMatch = (thisclicked.value === cardcompared.value);
+            let isMatch = ((thisclicked.value === cardcompared.value) && (thisclicked.title !== cardcompared.title));
             if (isMatch) {
                 istrue(thisclicked, cardcompared);
             } else {
