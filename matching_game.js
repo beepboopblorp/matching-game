@@ -96,9 +96,9 @@ let art = [
     new info(74, "Adam and Eve", "Renaissance", "1504 C.E.", "engraving", "Albrecht Dürer"), 
     new info(75, "Sistine Chapel", "Rennaisance", "1508 to 1541 C.E.", "fresco", "Michelangelo"), 
     new info(76, "School of Athens", "Renaissance", "1509 to 1511 C.E.", "fresco", "Stanza della Segnatura"), 
-    new info(77, "Isenheim Altarpiece", "Renaissance", "1512 to 1516 C.E.", "oil on wood", "(Matthias Grunewald"), 
-    new info(78, "Entombment of Christ", "Renaissance", "1525 to 1528 C.E.", "oil on wood", "(Jacopo da Pontormo"), 
-    new info(79, "Allegory of Law and Grace", "Renaissance", "1530 C.E.", "woodcut", "(Lucas Cranach the Elder"), 
+    new info(77, "Isenheim Altarpiece", "Renaissance", "1512 to 1516 C.E.", "oil on wood", "Matthias Grunewald"), 
+    new info(78, "Entombment of Christ", "Renaissance", "1525 to 1528 C.E.", "oil on wood", "Jacopo da Pontormo"), 
+    new info(79, "Allegory of Law and Grace", "Renaissance", "1530 C.E.", "woodcut", "Lucas Cranach the Elder"), 
     new info(80, "Venus of Urbino", "Renaissance", "1538 C.E.", "oil on canvas", "Titian"), 
     new info(81, "Frontispiece of the Codex Mendoza", "Early Colonial", "1541 to 1542 C.E.", "pigment on paper", "Viceroyalty of New Spain"), 
     new info(82, "Il Gesu", "Baroque", "1568 to 1679 C.E.", "brick, marble, fresco, and stucco", "Giacomo da Vignola (plan),  Giacomo della Porta(facade), Giovanni Battista Gaulli (ceiling fresco)"),
@@ -189,6 +189,17 @@ for (let i=0; i < 18; i++) {
     document.getElementById(matchcardid).addEventListener("click", clickyfuntime);
 }
 
+function artisterror() {
+    document.getElementById("selectunit").style.display = "none";
+    let choosetype = document.getElementsByName("select_type");
+    for (let i=0; i<choosetype.length; i++) {
+        choosetype[i].style.display = "none";
+    }
+    document.getElementById("endbox").style.display = "inline";
+    document.getElementById("endboxp").innerText = "An error occured. Not enough artists to play matching game. Click return to play again."
+}
+
+let matchcardappear;
 function setcardtype() {
     let properties = document.getElementsByName("select_type");
     for (let i=0; i<properties.length; i++) {
@@ -199,38 +210,40 @@ function setcardtype() {
         }
     }
 
-    let artistnum = 0;
-    if (cardtype) {
-        document.getElementById("selectunit").style.display = "none";
+    if(((chosen_unit == "1B") || (chosen_unit == "2B") || (chosen_unit == "2C") || (chosen_unit == "3A")) && (cardtype == "artist")) {
+        artisterror();
+    } else {
+        let artistnum = 0;
+        if (cardtype) {
+            document.getElementById("selectunit").style.display = "none";
 
-        let choosetype = document.getElementsByName("select_type");
-        for (let i=0; i<choosetype.length; i++) {choosetype[i].style.display = "none";}
+            let choosetype = document.getElementsByName("select_type");
+            for (let i=0; i<choosetype.length; i++) {choosetype[i].style.display = "none";}
 
-        let cardslist = document.getElementsByClassName("matchcard");
-        for (let i=0; i<cardslist.length; i++) {cardslist[i].style.display = "inline";}
-
-        if (cardtype == "artist") {
-            let artistarts = [];
-            for (i=0; i < unitarts.length; i++) {
-                if (unitarts[i].artist) {
-                    artistnum++;
+            if (cardtype == "artist") {
+                for (i=0; i < unitarts.length; i++) {
+                    if (unitarts[i].artist) {
+                        artistnum++;
+                    }
+                }
+                if (artistnum < 9) {
+                    artisterror();
+                } else {
+                    let cardslist = document.getElementsByClassName("matchcard");
+                    for (let i=0; i<cardslist.length; i++) {cardslist[i].style.display = "inline";}
+                    matchcardappear = true;
                 }
             }
-        }
 
-        if ((cardtype == "artist") && (artistnum < 9)) {
-            document.getElementById("endbox").style.display = "inline";
-            document.getElementById("endbox").innerHTML = `<p>An error occured. Not enough artists to play matching game. Click return to play again.</p>
-                                                            <a id="return" href="index.html">Return</a>`;
-            for (let i=0; i < 18; i++) {
-                let matchcardid = "card" + (i + 1);
-                document.getElementById(matchcardid).style.display = "none";
+            if (matchcardappear != true) {
+                let cardslist = document.getElementsByClassName("matchcard");
+                for (let i=0; i<cardslist.length; i++) {cardslist[i].style.display = "inline";}
             }
-        }
 
-        randassign();
-        randcardassign();
-        assigntocard();
+            randassign();
+            randcardassign();
+            assigntocard();
+        }
     }
 }
 
@@ -261,14 +274,12 @@ function randassign() {
                 }
             }
         }
-        console.log(unitarts.length);
         while (randnums.length < 9) {
             randnum = Math.floor(Math.random() * unitarts.length);
             if (!randnums.includes(randnum)) {
                 randnums.push(randnum);
             }
         }
-        console.log(randnums);
     } else {
         document.getElementById("endbox").innerHTML = `<p>An error occured. Click return to play again.</p>
                                                             <a id="return" href="index.html">Return</a>`;
