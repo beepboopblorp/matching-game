@@ -230,16 +230,22 @@ let mcqc = [1,2,3,4];
 
 if (document.getElementById("showoptions")) {
     document.getElementById("showoptions").addEventListener("click", () => {
-        document.getElementById("showoptions").style.color = "rebeccapurple";
-        document.getElementById("showoptions").style.backgroundColor = "white";
-        document.getElementById("MC").style.display = "inline";
+        if (document.getElementById("showoptions").style.color == "white") {
+            document.getElementById("showoptions").style.color = "rebeccapurple";
+            document.getElementById("showoptions").style.backgroundColor = "white";
+            document.getElementById("MC").style.display = "inline";
+        } else {
+            document.getElementById("showoptions").style.color = "white";
+            document.getElementById("showoptions").style.backgroundColor = "rebeccapurple";
+            document.getElementById("MC").style.display = "none";
+        }
     })
 }
 
 function assignq() {
     document.getElementById("questionthings").style.display = "inline";
-    document.getElementById("options").style.color = "white";
-    document.getElementById("options").style.backgroundColor = "rebeccapurple";
+    document.getElementById("showoptions").style.color = "white";
+    document.getElementById("showoptions").style.backgroundColor = "rebeccapurple";
 
     do {
         randq = Math.floor(Math.random() * unitarts.length);
