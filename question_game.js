@@ -98,7 +98,7 @@ let art = [
     new info(79, "Allegory of Law and Grace", "Renaissance", "1530 C.E.", "woodcut", "Lucas Cranach the Elder"), 
     new info(80, "Venus of Urbino", "Renaissance", "1538 C.E.", "oil on canvas", "Titian"), 
     new info(81, "Frontispiece of the Codex Mendoza", "Early Colonial", "1541 to 1542 C.E.", "pigment on paper", "Viceroyalty of New Spain"), 
-    new info(82, "Il Gesu", "Baroque", "1568 to 1679 C.E.", "brick, marble, fresco, and stucco", "Giacomo da Vignola (plan),  Giacomo della Porta(facade), Giovanni Battista Gaulli (ceiling fresco)"),
+    new info(82, "Il Gesu", "Baroque", "1568 to 1679 C.E.", "brick, marble, fresco, and stucco", "Giacomo da Vignola,  Giacomo della Porta, Giovanni Battista Gaulli"),
     new info(83, "Hunters in the Snow", "Renaissance", "1565 C.E.", "oil on wood", "Pieter Bruegal"),
     new info(84, "Mosque of Selim II", "Classical Ottoman", "1568 to 1575 C.E.", "brick and stone", "Sinan"),
     new info(85, "Calling of Saint Matthew", "Baroque", "1597 to 1601 C.E.", "oil on canvas", "Caravaggio"), 
@@ -128,55 +128,59 @@ for (i=0; i < units.length; i++) {
     }
 }
 
+let canchooseunit = true;
 function unitselect() {
-    this.style.backgroundColor = "rebeccapurple";
-    this.style.color = "black";
-    chosen_unit = this.value;
-    switch (chosen_unit) {
-        case "1B":
-            unitarts = [];
-            for (i=0; i < 11; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
+    if (canchooseunit) {
+        canchooseunit = false;
+        this.style.backgroundColor = "rebeccapurple";
+        this.style.color = "black";
+        chosen_unit = this.value;
+        switch (chosen_unit) {
+            case "1B":
+                unitarts = [];
+                for (i=0; i < 11; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
+                
+            case "2B":
+                unitarts = [];
+                for (i=11; i < 25; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
+                
+            case "2C":
+                unitarts = [];
+                for (i=25; i < 47; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
             
-        case "2B":
-            unitarts = [];
-            for (i=11; i < 25; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
-            
-        case "2C":
-            unitarts = [];
-            for (i=25; i < 47; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
-        
-        case "3A":
-            unitarts = [];
-            for (i=47; i < 64; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
+            case "3A":
+                unitarts = [];
+                for (i=47; i < 64; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
 
-        case "3B":
-            unitarts = [];
-            for (i=64; i < 81; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
+            case "3B":
+                unitarts = [];
+                for (i=64; i < 81; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
 
-        case "3C":
-            unitarts = [];
-            for (i=81; i < 98; i++) {
-                unitarts.push(art[i]);
-            }
-            break;
+            case "3C":
+                unitarts = [];
+                for (i=81; i < 98; i++) {
+                    unitarts.push(art[i]);
+                }
+                break;
+        }
+        document.getElementById("selecttype").style.display = "inline";
+        document.getElementById("submit_type").style.display = "inline";
     }
-    document.getElementById("selecttype").style.display = "inline";
-    document.getElementById("submit_type").style.display = "inline";
 }
 
 if (document.getElementById("submit_type")) {document.getElementById("submit_type").addEventListener("click", setq);}
@@ -188,9 +192,10 @@ function artisterror() {
         choosetype[i].style.display = "none";
     }
     document.getElementById("endbox").style.display = "inline";
-    document.getElementById("endboxp").innerText = "An error occured. There are no artists in this selection. Click return to play again."
+    document.getElementById("endboxp").innerText = "An error occured. There are not enough artists in this selection. Click return to play again."
 }
 
+let arttouse = [];
 function setq() {
     let properties = document.getElementsByName("select_type");
     for (let i=0; i<properties.length; i++) {
@@ -202,20 +207,29 @@ function setq() {
     }
     if (questiontype) {
         document.getElementById("selectunit").style.display = "none";
-
         let choosetype = document.getElementsByName("select_type");
         for (let i=0; i<choosetype.length; i++) {choosetype[i].style.display = "none";}
 
         if (questiontype == "artist") {
+            console.log("type is artist");
             for (i=0; i < unitarts.length; i++) {
-                if (!unitarts[i].artist) {
-                    unitarts.splice(i, 1);
-                }
+                console.log("inside for loop");
+                console.log(unitarts[i].artist);
+                if (unitarts[i].artist) {
+                    console.log("artist: " + unitarts[i].artist)
+                    arttouse.push(unitarts[i]);
+                    console.log("arttouse length: " + arttouse.length);
+                } else {console.log("no artist");}
             }
-            if (!unitarts.length) {
-                artisterror();
-            } else {
+
+            console.log(arttouse.length)
+
+            if (arttouse.length > 3) {
+                console.log("assign questions");
                 assignq();
+            } else {
+                console.log("enact error")
+                artisterror();
             }
         } else {
             assignq();
@@ -248,7 +262,7 @@ function assignq() {
     document.getElementById("showoptions").style.backgroundColor = "rebeccapurple";
 
     do {
-        randq = Math.floor(Math.random() * unitarts.length);
+        if (questiontype == "artist") {randq = Math.floor(Math.random() * arttouse.length)} else {randq = Math.floor(Math.random() * unitarts.length)}
         if(!lastnums.includes(randq)) {
             acceptableq = true;
         } else {
@@ -259,13 +273,13 @@ function assignq() {
     if (acceptableq) {
         lastnums.push(randq);
         lastnums.splice(0, 1);
+        let i = 0;
         switch (questiontype) {
             case "dates":
                 document.getElementById("qask").innerText = unitarts[randq].name + " date";
                 ca = Math.floor(Math.random() * 4);
                 document.getElementById("answer" + (ca + 1)).innerText = unitarts[randq].date;
                 mcqc.splice(ca, 1);
-                let i = 0;
                 while (i < 3) {
                     randnum = Math.floor(Math.random() * unitarts.length);
                     if ((unitarts[randnum].date != document.getElementById("answer1").innerText) && (unitarts[randnum].date != document.getElementById("answer2").innerText) && (unitarts[randnum].date != document.getElementById("answer3").innerText) && (unitarts[randnum].date != document.getElementById("answer4").innerText)) {
@@ -291,15 +305,15 @@ function assignq() {
                 break;
 
             case "artist":
-                document.getElementById("qask").innerText = unitarts[randq].name + " artist";
+                document.getElementById("qask").innerText = arttouse[randq].name + " artist";
                 ca = Math.floor(Math.random() * 4);
-                document.getElementById("answer" + (ca + 1)).innerText = unitarts[randq].artist;
+                document.getElementById("answer" + (ca + 1)).innerText = arttouse[randq].artist;
                 mcqc.splice(ca, 1);
                 i = 0;
                 while (i < 3) {
-                    randnum = Math.floor(Math.random() * unitarts.length);
-                    if ((unitarts[randnum].artist != document.getElementById("answer1").innerText) && (unitarts[randnum].artist != document.getElementById("answer2").innerText) && (unitarts[randnum].artist != document.getElementById("answer3").innerText) && (unitarts[randnum].artist != document.getElementById("answer4").innerText)) {
-                        document.getElementById("answer" + mcqc[i]).innerText = unitarts[randnum].artist;
+                    randnum = Math.floor(Math.random() * arttouse.length);
+                    if ((arttouse[randnum].artist != document.getElementById("answer1").innerText) && (arttouse[randnum].artist != document.getElementById("answer2").innerText) && (arttouse[randnum].artist != document.getElementById("answer3").innerText) && (arttouse[randnum].artist != document.getElementById("answer4").innerText)) {
+                        document.getElementById("answer" + mcqc[i]).innerText = arttouse[randnum].artist;
                         i++
                     }
                 }
@@ -390,6 +404,7 @@ function mcqreset() {
     for (let i = 0; i < 4; i++) {
         document.getElementById("answer" + (i + 1)).style.backgroundColor = "rebeccapurple";
     }
+    document.getElementById("MC").style.display = "none";
     assignq()
 }
 
@@ -401,102 +416,16 @@ for (let i = 0; i < 4; i++) {
 
 let qredo;
 function checkmcq() {
-    switch (questiontype) {
-        case "dates":
-            if (this.innerText == unitarts[randq].date) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].date == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "materials":
-            if (this.innerText == unitarts[randq].material) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].material == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "culture":
-            if (this.innerText == unitarts[randq].culture) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].culture == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "artist":
-            if (this.innerText == unitarts[randq].artist) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].artist == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "forms":
-            if (this.innerText == unitarts[randq].form) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].form == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "contents":
-            if (this.innerText == unitarts[randq].content) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].content == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "functions":
-            if (this.innerText == unitarts[randq].function) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].function == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
-        case "contexts":
-            if (this.innerText == unitarts[randq].context) {
-                this.style.backgroundColor = "green";
-                setTimeout(mcqreset, 1000);
-            } else {
-                this.style.backgroundColor = "red";
-                for (i=0;i<unitarts.length;i++) {
-                    if(unitarts[i].context == document.getElementById("qask").innerText) {qredo = i;}
-                }
-            }
-            break;
-            
+    if (this.value == ca) {
+        this.style.backgroundColor = "green";
+        setTimeout(mcqreset, 1000);
+    } else {
+        this.style.backgroundColor = "red";
     }
 }
+
+if (document.getElementById("endgame")) {document.getElementById("endgame").addEventListener("click", ()=>{
+    document.getElementById("questionthings").style.display = "none";
+    document.getElementById("endbox").style.display = "inline";
+    document.getElementById("endp").innerText = "You completed the game! Click return to play again."
+})}

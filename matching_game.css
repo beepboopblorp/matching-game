@@ -106,7 +106,7 @@ label {
     display: none;
 }
 
-.answer, #showoptions {
+.answer, #showoptions, #endgame {
     background-color: rebeccapurple;
     color: white;
     border-radius: 5px;
@@ -121,10 +121,24 @@ label {
     color: rebeccapurple;
 }
 
+#showoptions:hover {
+    background-color: white;
+    color: rebeccapurple;
+}
+
+#endgame:hover {
+    background-color: white;
+    color: rebeccapurple;
+}
+
 #qask {
     margin-left: 2.5%;
     margin-right: 2.5%;
     margin-top: 5%;
     margin-bottom: 2.5%;
     font-family: 'Courier New', Courier, monospace;
+}
+
+#artimgs {
+    display: none;
 }

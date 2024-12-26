@@ -15,5 +15,16 @@
     <div id="artimgs">
         <img style="height: 50px; width: 50px;" src="">        
     </div>
+
+    <script>
+        if (document.getElementById("showart")) {document.getElementById("showart").addEventListener("click", ()=> {
+            if (document.getElementById("showart").style.color == "rebeccapurple") {
+                document.getElementById("artimgs").style.display = "none";
+            } else {
+                document.getElementById("showart").style.color = "rebeccapurple";
+                document.getElementById("artimgs").style.display = "inline";
+            }
+        })}
+    </script>
 </body>
 </html>
